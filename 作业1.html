@@ -2,39 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PSI Realtime Data</title>
+    <title>Pollutant Standards Index Singapore</title>
     <style>
-        table {border-collapse: collapse; width: 80%; margin: 20px auto;}
-        th,td {border:1px solid #999; padding:8px; text-align:center;}
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 20px;
+            font-weight:normal;
+            margin:0 0 5px;
+        }
+        .status {
+            text-align:center;
+            margin-bottom:20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+        }
+        th {
+            background-color: #61a847;
+            color: white;
+            padding: 6px 10px;
+            text-align: left;
+            border:1px solid #ddd;
+        }
+        td {
+            padding: 5px 10px;
+            border:1px solid #ddd;
+        }
+        .refresh-btn {
+            display:block;
+            margin:15px auto;
+            padding:4px 12px;
+        }
+        .footer-text {
+            text-align:center;
+            margin-top:20px;
+            font-size:14px;
+            color:#333;
+        }
     </style>
 </head>
 <body>
-    <h2 style="text-align:center">Singapore PSI Readings</h2>
-    <table id="psiTable">
+    <h1>Pollutant Standards Index</h1>
+    <h2>Singapore</h2>
+    <div class="status">Status: Healthy</div>
+
+    <table>
         <thead>
-            <tr><th>Metric</th><th>Value</th></tr>
+            <tr>
+                <th>Metric</th>
+                <th>central</th>
+                <th>west</th>
+                <th>east</th>
+                <th>north</th>
+                <th>south</th>
+            </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            <tr><td>o3_sub_index</td><td>27</td><td>16</td><td>25</td><td>39</td><td>21</td></tr>
+            <tr><td>pm10_twenty_four_hourly</td><td>99</td><td>104</td><td>86</td><td>68</td><td>69</td></tr>
+            <tr><td>pm10_sub_index</td><td>75</td><td>77</td><td>69</td><td>59</td><td>60</td></tr>
+            <tr><td>co_sub_index</td><td>8</td><td>7</td><td>6</td><td>9</td><td>7</td></tr>
+            <tr><td>pm25_twenty_four_hourly</td><td>75</td><td>72</td><td>55</td><td>49</td><td>50</td></tr>
+            <tr><td>so2_sub_index</td><td>4</td><td>4</td><td>3</td><td>4</td><td>3</td></tr>
+            <tr><td>co_eight_hour_max</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>no2_one_hour_max</td><td>19</td><td>21</td><td>11</td><td>9</td><td>14</td></tr>
+            <tr><td>so2_twenty_four_hourly</td><td>6</td><td>7</td><td>5</td><td>6</td><td>5</td></tr>
+            <tr><td>pm25_sub_index</td><td>122</td><td>118</td><td>100</td><td>93</td><td>94</td></tr>
+            <tr><td>psi_twenty_four_hourly</td><td>122</td><td>118</td><td>100</td><td>93</td><td>94</td></tr>
+            <tr><td>o3_eight_hour_max</td><td>64</td><td>37</td><td>59</td><td>92</td><td>49</td></tr>
+        </tbody>
     </table>
 
-<script>
-// API地址
-const apiUrl = "https://api-open.data.gov.sg/v2/real-time/api/psi";
+    <button class="refresh-btn" onclick="refreshData()">Refresh</button>
 
-fetch(apiUrl)
-.then(res=>res.json())
-.then(data=>{
-    // 获取最新读数
-    const readings = data.items[0].readings;
-    const tbody = document.querySelector("#psiTable tbody");
-    // 遍历12个指标，写入表格
-    Object.entries(readings).forEach(([key,val])=>{
-        const row = document.createElement('tr');
-        row.innerHTML = `<td>${key}</td><td>${val}</td>`;
-        tbody.appendChild(row);
-    })
-})
-.catch(err=>console.error(err));
+    <div class="footer-text">
+        Updated at: 05/10/2026, 8:09:12 pm<br>
+        by Michael S. Susante Source by Singapore Government Agency
+    </div>
+
+<script>
+
+function refreshData(){
+    alert("Refreshing PSI data...\nIn real assignment: fetch API from Singapore NEA");
+}
 </script>
+
 </body>
 </html>
+
