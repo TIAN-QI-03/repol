@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PSI Realtime Data</title>
+    <style>
+        table {border-collapse: collapse; width: 80%; margin: 20px auto;}
+        th,td {border:1px solid #999; padding:8px; text-align:center;}
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center">Singapore PSI Readings</h2>
+    <table id="psiTable">
+        <thead>
+            <tr><th>Metric</th><th>Value</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+<script>
+// API地址
+const apiUrl = "https://api-open.data.gov.sg/v2/real-time/api/psi";
+
+fetch(apiUrl)
+.then(res=>res.json())
+.then(data=>{
+    // 获取最新读数
+    const readings = data.items[0].readings;
+    const tbody = document.querySelector("#psiTable tbody");
+    // 遍历12个指标，写入表格
+    Object.entries(readings).forEach(([key,val])=>{
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${key}</td><td>${val}</td>`;
+        tbody.appendChild(row);
+    })
+})
+.catch(err=>console.error(err));
+</script>
+</body>
+</html>
